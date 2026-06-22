@@ -35,5 +35,5 @@ books-shop은 도서 판매 SPA다. 하나의 저장소에 프론트(shop-front)
 - API 연동(axios / react query) → front-api-client
 - 전역 상태(zustand) → front-state-store
 - 컴포넌트 / 스타일(CSS Module + Tailwind) → front-ui-component
-- 라우팅 / 페이지(react-router) → front-routing
+- 라우팅 / 페이지 / 레이아웃·Outlet(react-router) → front-routing
 - 백엔드 스킬은 추후 추가 예정.
