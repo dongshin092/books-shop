@@ -1,0 +1,34 @@
+// shop-front 는 node-gradle 플러그인만 적용한다.
+plugins {
+    id 'com.github.node-gradle.node' version '7.1.0'
+}
+
+node {
+    version = '24.15.0'
+    // 시스템에 설치된 Node 를 사용한다(다운로드하지 않음).
+    download = false
+}
+
+// npm ci
+tasks.register('npmCi', com.github.gradle.node.npm.task.NpmTask) {
+    args = ['ci']
+    inputs.file('package.json')
+    inputs.file('package-lock.json')
+    outputs.dir('node_modules')
+}
+
+// npm ci 후 npm run build 를 실행해 dist 를 생성한다.
+tasks.register('buildFront', com.github.gradle.node.npm.task.NpmTask) {
+    dependsOn 'npmCi'
+    args = ['run', 'build']
+    inputs.dir('src')
+    inputs.file('package.json')
+    inputs.file('vite.config.js')
+    inputs.file('index.html')
+    outputs.dir('dist')
+}
+
+// 루트 build 시 프론트도 함께 빌드되도록 연결한다.
+tasks.register('build') {
+    dependsOn 'buildFront'
+}

@@ -1,0 +1,17 @@
+@reference "../index.css";
+
+.container {
+  @apply flex min-h-screen flex-col items-center justify-center gap-4 bg-gray-50;
+}
+
+.title {
+  @apply text-2xl font-bold text-gray-800;
+}
+
+.status {
+  @apply text-lg text-green-600;
+}
+
+.error {
+  @apply text-lg text-red-600;
+}
