@@ -36,4 +36,7 @@ books-shop은 도서 판매 SPA다. 하나의 저장소에 프론트(shop-front)
 - 전역 상태(zustand) → front-state-store
 - 컴포넌트 / 스타일(CSS Module + Tailwind) → front-ui-component
 - 라우팅 / 페이지 / 레이아웃·Outlet(react-router) → front-routing
-- 백엔드 스킬은 추후 추가 예정.
+- API 설계 / 컨트롤러 / 엔드포인트(RESTful URL·HTTP 메서드·수정 시 PUT) → backend-api-conventions
+- 공통 응답·에러 응답 포맷 / 전역 예외 처리(ApiResponse·ErrorResponse) → backend-api-response
+- 백엔드 코드 작성 스타일(주석 최소화 등) → backend-coding-style
+- JPA 영속성(엔티티·리포지토리·쿼리·DTO, Auditing, JPQL/QueryDSL, 경계 밖 DTO) → backend-jpa-persistence
