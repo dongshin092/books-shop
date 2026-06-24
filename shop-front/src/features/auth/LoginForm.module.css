@@ -1,0 +1,52 @@
+@reference "@/index.css";
+
+.wrapper {
+  @apply flex min-h-screen items-center justify-center bg-gray-50;
+}
+
+.card {
+  @apply w-full max-w-sm rounded-xl bg-white p-8 shadow-md;
+}
+
+.title {
+  @apply mb-6 text-center text-2xl font-bold text-gray-800;
+}
+
+.field {
+  @apply mb-4;
+}
+
+.label {
+  @apply mb-1 block text-sm font-medium text-gray-700;
+}
+
+.input {
+  @apply w-full rounded-md border border-gray-300 px-3 py-2 text-sm;
+  @apply focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500;
+}
+
+.input:disabled {
+  @apply bg-gray-100 cursor-not-allowed;
+}
+
+.errorText {
+  @apply mt-1 text-xs text-red-500;
+}
+
+.errorBanner {
+  @apply mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600;
+}
+
+.submitBtn {
+  @apply w-full rounded-md bg-blue-600 py-2 text-sm font-semibold text-white;
+  @apply hover:bg-blue-700 transition-colors;
+  @apply disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.footer {
+  @apply mt-4 text-center text-sm text-gray-500;
+}
+
+.signupLink {
+  @apply ml-1 font-medium text-blue-600 hover:underline;
+}

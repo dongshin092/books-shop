@@ -19,6 +19,14 @@ dependencies {
     // 보안
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    // JPA 영속성
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // PostgreSQL 드라이버
+    runtimeOnly 'org.postgresql:postgresql'
+
+    // 개발 편의 (자동 재시작 등)
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
     // JWT (jjwt 0.13.0)
     implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
@@ -26,6 +34,13 @@ dependencies {
 
     // 객체 -> JSON 문서 변환
     implementation 'org.json:json:20260522'
+
+    // 입력값 검증 (@Valid, @NotBlank 등)
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -35,10 +50,3 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-// 통합 빌드: shop-front 빌드 결과물(dist)을 static 으로 복사해 단일 실행 jar 에 함께 포함한다.
-tasks.named('processResources') {
-    dependsOn ':shop-front:buildFront'
-    from("${project(':shop-front').projectDir}/dist") {
-        into 'static'
-    }
-}

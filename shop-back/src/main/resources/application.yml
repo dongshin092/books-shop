@@ -1,0 +1,46 @@
+
+# 내부 톰캣 세팅
+server:
+  port: 9090
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+  #spring에서 사용하는 encoding 설정
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+  #기본 설정 변경 가능하도록 함
+  main:
+    allow-bean-definition-overriding: true
+  # PostgreSQL DataSource (값은 환경변수로 주입)
+  datasource:
+    url: jdbc:postgresql://aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres
+    username: postgres.ikpxqsfntledbzuxwyyk
+    password: ehdduf@922A
+    driver-class-name: org.postgresql.Driver
+  # JPA / Hibernate
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  #코드 수정 후 자동 재시작 시켜주는 것
+  devtools:
+    restart:
+      enabled: true
+      #변경 감지 주기
+      poll-interval: 2s
+      quiet-period: 1s
+
+# JWT 인증 설정
+jwt:
+  # HS256 서명 키 — 환경변수 JWT_SECRET 주입 필수 (256bit 이상)
+  secret: vmfhaltmskdlstkfkdgodyroqkfwkdbalroqkfwkdbalaaaaaaaaaaaaaaaabbbbb
+  # 액세스 토큰 만료 시간 (초 단위, 기본 3600 = 1시간)
+  expiration-seconds: 3600

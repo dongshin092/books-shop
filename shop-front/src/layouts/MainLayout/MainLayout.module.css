@@ -1,0 +1,29 @@
+@reference "@/index.css";
+
+.layout {
+  @apply min-h-screen flex flex-col;
+}
+
+.header {
+  @apply flex items-center gap-4 border-b px-6 py-3 bg-white;
+}
+
+.brand {
+  @apply text-lg font-bold text-gray-800 mr-4;
+}
+
+.nav {
+  @apply flex items-center gap-2;
+}
+
+.link {
+  @apply px-3 py-1 rounded text-gray-600 hover:text-gray-900;
+}
+
+.active {
+  @apply font-bold text-blue-600;
+}
+
+.content {
+  @apply flex-1 p-6;
+}
