@@ -5,23 +5,34 @@
 }
 
 .header {
-  @apply flex items-center gap-4 border-b px-6 py-3 bg-white;
-}
-
-.brand {
-  @apply text-lg font-bold text-gray-800 mr-4;
+  @apply flex items-center justify-between h-[72px] px-12;
+  @apply border-b border-[#C9A96E]/10;
+  background: linear-gradient(
+    90deg,
+    #0a0a12 0%,
+    #2a1845 35%,
+    #2a1845 65%,
+    #0a0a12 100%
+  );
 }
 
 .nav {
-  @apply flex items-center gap-2;
+  @apply flex items-center gap-9;
 }
 
 .link {
-  @apply px-3 py-1 rounded text-gray-600 hover:text-gray-900;
+  @apply text-lg text-white/70 transition-colors hover:text-white;
 }
 
 .active {
-  @apply font-bold text-blue-600;
+  @apply font-bold text-white;
+}
+
+.loginButton {
+  @apply inline-flex items-center justify-center rounded-md px-5 py-2;
+  @apply text-sm font-bold text-[#1a1020];
+  @apply transition-opacity hover:opacity-90;
+  background: linear-gradient(180deg, #d8bd86 0%, #c9a96e 100%);
 }
 
 .content {

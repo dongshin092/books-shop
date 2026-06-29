@@ -1,0 +1,9 @@
+@reference "@/index.css";
+
+.container {
+  @apply py-12;
+}
+
+.title {
+  @apply text-2xl font-bold text-gray-800;
+}

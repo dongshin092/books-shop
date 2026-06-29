@@ -1,0 +1,13 @@
+@reference "@/index.css";
+
+.container {
+  @apply max-w-6xl mx-auto px-4 py-8;
+}
+
+.loading {
+  @apply flex items-center justify-center py-24 text-gray-400 text-sm;
+}
+
+.error {
+  @apply flex items-center justify-center py-24 text-red-500 text-sm;
+}

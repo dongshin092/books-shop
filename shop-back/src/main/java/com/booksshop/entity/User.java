@@ -41,7 +41,6 @@ public class User extends BaseEntity {
 
     @Column(name = "addr_detail", length = 300)
     private String addrDetail;
-
     @Column(name = "post_code", length = 10, nullable = false)
     private String postCode;
 

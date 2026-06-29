@@ -1,0 +1,21 @@
+@reference "@/index.css";
+
+.section {
+  @apply mb-10;
+}
+
+.header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.title {
+  @apply text-lg font-bold text-gray-900 border-l-4 border-blue-500 pl-3;
+}
+
+.grid {
+  @apply grid grid-cols-5 gap-4;
+}
+
+.empty {
+  @apply col-span-5 py-10 text-center text-sm text-gray-400;
+}
