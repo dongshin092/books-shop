@@ -1,0 +1,177 @@
+@reference "@/index.css";
+
+/* 페이지 전체 */
+.page {
+  @apply max-w-4xl mx-auto px-4 py-8 flex flex-col gap-12;
+}
+
+.statusMessage {
+  @apply flex items-center justify-center py-24 text-gray-500 text-base;
+}
+
+/* ── 상단: 표지 + 도서 정보 ── */
+.topSection {
+  @apply flex gap-10 items-start;
+}
+
+.coverWrapper {
+  @apply flex-shrink-0 w-48 rounded-xl overflow-hidden shadow-md bg-gray-100;
+}
+
+.coverImage {
+  @apply w-full h-full object-cover;
+}
+
+.infoWrapper {
+  @apply flex flex-col gap-4 flex-1;
+}
+
+/* 카테고리 뱃지 */
+.categoryBadge {
+  @apply inline-block text-xs font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded px-2 py-0.5 w-fit;
+}
+
+.title {
+  @apply text-2xl font-bold text-gray-900 leading-snug;
+}
+
+/* 저자/출판사/출간일 */
+.metaList {
+  @apply flex flex-col gap-1 border-b pb-4;
+}
+
+.metaRow {
+  @apply flex gap-3 text-sm text-gray-600;
+}
+
+.metaRow dt {
+  @apply w-12 flex-shrink-0 text-gray-400;
+}
+
+.metaRow dd {
+  @apply text-gray-700;
+}
+
+/* 가격 영역 */
+.priceBlock {
+  @apply flex flex-col gap-1;
+}
+
+.listPrice {
+  @apply text-sm text-gray-400 line-through;
+}
+
+.salePriceRow {
+  @apply flex items-center gap-2;
+}
+
+.discountBadge {
+  @apply text-sm font-bold text-red-500 bg-red-50 px-1.5 py-0.5 rounded;
+}
+
+.salePrice {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+/* 버튼 */
+.buttonRow {
+  @apply flex gap-3 mt-2;
+}
+
+.cartBtn {
+  @apply flex-1 py-3 border border-blue-600 text-blue-600 font-semibold rounded-lg;
+  @apply hover:bg-blue-50 transition-colors;
+}
+
+.buyBtn {
+  @apply flex-1 py-3 bg-blue-600 text-white font-semibold rounded-lg;
+  @apply hover:bg-blue-700 transition-colors;
+}
+
+/* ── 책 소개 ── */
+.descSection {
+  @apply flex flex-col gap-4;
+}
+
+.sectionTitle {
+  @apply text-lg font-bold text-gray-900 border-l-4 border-blue-600 pl-3;
+}
+
+.descContent {
+  @apply text-sm text-gray-700 leading-relaxed bg-gray-50 rounded-lg p-5 whitespace-pre-line;
+}
+
+/* ── 독자 리뷰 ── */
+.reviewSection {
+  @apply flex flex-col gap-6;
+}
+
+.reviewTitleRow {
+  @apply flex items-center justify-between;
+}
+
+.reviewCount {
+  @apply text-sm text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full font-medium;
+}
+
+.emptyReview {
+  @apply text-sm text-gray-400 py-8 text-center;
+}
+
+.reviewList {
+  @apply flex flex-col divide-y;
+}
+
+.reviewItem {
+  @apply flex flex-col gap-2 py-5;
+}
+
+.reviewHeader {
+  @apply flex items-center gap-3;
+}
+
+.avatar {
+  @apply w-9 h-9 rounded-full bg-blue-500 text-white text-sm font-bold flex items-center justify-center flex-shrink-0;
+}
+
+.reviewMeta {
+  @apply flex flex-col flex-1;
+}
+
+.reviewerName {
+  @apply text-sm font-semibold text-gray-900;
+}
+
+.reviewDate {
+  @apply text-xs text-gray-400;
+}
+
+.stars {
+  @apply flex gap-0.5 text-base ml-auto;
+}
+
+.starFilled {
+  @apply text-yellow-400;
+}
+
+.starEmpty {
+  @apply text-gray-200;
+}
+
+.reviewContent {
+  @apply text-sm text-gray-700 leading-relaxed pl-12;
+}
+
+/* ── 페이지네이션 ── */
+.pagination {
+  @apply flex items-center justify-center gap-1 pt-4;
+}
+
+.pageBtn {
+  @apply w-8 h-8 flex items-center justify-center rounded text-sm text-gray-600;
+  @apply hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors;
+}
+
+.pageBtnActive {
+  @apply bg-blue-600 text-white hover:bg-blue-600 font-semibold;
+}

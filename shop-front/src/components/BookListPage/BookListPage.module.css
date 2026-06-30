@@ -1,0 +1,197 @@
+@reference "@/index.css";
+
+/* ── 페이지 전체 ── */
+.page {
+  @apply max-w-5xl mx-auto px-4 py-8 flex flex-col gap-6;
+}
+
+/* ── 브레드크럼 ── */
+.breadcrumb {
+  @apply flex items-center gap-1 text-sm text-gray-500;
+}
+
+.breadcrumbSep {
+  @apply text-gray-400 select-none;
+}
+
+.breadcrumbLink {
+  @apply hover:text-blue-600 transition-colors no-underline text-gray-500;
+}
+
+.breadcrumbCurrent {
+  @apply text-gray-700 font-medium;
+}
+
+/* ── 헤더: 제목 + 정렬 탭 ── */
+.header {
+  @apply flex items-center justify-between flex-wrap gap-4;
+}
+
+.titleRow {
+  @apply flex items-center gap-3;
+}
+
+.categoryTitle {
+  @apply text-2xl font-bold text-gray-900;
+}
+
+.totalBadge {
+  @apply text-sm font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-full px-3 py-0.5;
+}
+
+/* ── 정렬 탭 ── */
+.sortTabs {
+  @apply flex items-center gap-1;
+}
+
+.sortTab {
+  @apply px-3 py-1.5 text-sm rounded text-gray-600 font-medium transition-colors;
+}
+
+.sortTab:hover {
+  @apply bg-gray-100;
+}
+
+.sortTabActive {
+  @apply bg-blue-600 text-white;
+}
+
+.sortTabActive:hover {
+  @apply bg-blue-700;
+}
+
+/* ── 도서 목록 ── */
+.bookList {
+  @apply flex flex-col divide-y divide-gray-200;
+}
+
+/* ── 도서 아이템 (가로형) ── */
+.bookItem {
+  @apply flex items-start gap-5 py-6;
+}
+
+/* 표지 영역 */
+.coverWrapper {
+  @apply flex-shrink-0 w-24 h-32 rounded-lg overflow-hidden bg-gray-100 shadow-sm;
+}
+
+.coverImage {
+  @apply w-full h-full object-cover;
+}
+
+/* 정보 영역 */
+.bookInfo {
+  @apply flex flex-col gap-1.5 flex-1 min-w-0;
+}
+
+.badgeRow {
+  @apply flex items-center gap-2;
+}
+
+.badgeBest {
+  @apply text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded;
+}
+
+.badgeNew {
+  @apply text-xs font-bold text-blue-600 bg-blue-50 border border-blue-200 px-1.5 py-0.5 rounded;
+}
+
+.bookTitle {
+  @apply text-base font-bold text-gray-900 leading-snug no-underline;
+}
+
+.bookTitle:hover {
+  @apply text-blue-600;
+}
+
+.bookSubtitle {
+  @apply text-sm text-gray-500 leading-snug;
+}
+
+.bookMeta {
+  @apply text-sm text-gray-500;
+}
+
+/* 별점 */
+.ratingRow {
+  @apply flex items-center gap-1.5 text-sm;
+}
+
+.starsText {
+  @apply text-yellow-400 text-base tracking-tighter;
+}
+
+.ratingScore {
+  @apply font-semibold text-gray-800;
+}
+
+.reviewCount {
+  @apply text-gray-400;
+}
+
+/* 가격 */
+.priceRow {
+  @apply flex items-baseline gap-2 mt-0.5;
+}
+
+.listPrice {
+  @apply text-sm text-gray-400 line-through;
+}
+
+.discountRate {
+  @apply text-sm font-bold text-red-500;
+}
+
+.salePrice {
+  @apply text-lg font-bold text-gray-900;
+}
+
+/* ── 액션 버튼 영역 ── */
+.actions {
+  @apply flex flex-col items-end gap-2 flex-shrink-0 justify-start pt-1;
+}
+
+.cartBtn {
+  @apply w-24 py-2 text-sm border border-blue-600 text-blue-600 font-semibold rounded-md transition-colors;
+}
+
+.cartBtn:hover {
+  @apply bg-blue-50;
+}
+
+.buyBtn {
+  @apply w-24 py-2 text-sm bg-blue-600 text-white font-semibold rounded-md transition-colors;
+}
+
+.buyBtn:hover {
+  @apply bg-blue-700;
+}
+
+.listBtn {
+  @apply text-xs text-gray-400 hover:text-gray-600 transition-colors underline-offset-2;
+}
+
+/* ── 페이지네이션 ── */
+.pagination {
+  @apply flex items-center justify-center gap-1 pt-4;
+}
+
+.pageBtn {
+  @apply w-9 h-9 flex items-center justify-center rounded text-sm text-gray-600 transition-colors;
+}
+
+.pageBtn:hover:not(:disabled) {
+  @apply bg-gray-100;
+}
+
+.pageBtn:disabled {
+  @apply opacity-30 cursor-not-allowed;
+}
+
+.pageBtnActive {
+  @apply bg-blue-600 text-white font-semibold;
+}
+
+.pageBtnActive:hover {
+  @apply bg-blue-700;
+}
