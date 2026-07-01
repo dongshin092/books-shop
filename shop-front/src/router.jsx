@@ -4,6 +4,8 @@ import { HomePage } from '@/pages/Home/Home'
 import { ItBooksPage } from '@/pages/ItBooks/ItBooks'
 import { NovelPage } from '@/pages/Novel/Novel'
 import { SelfDevelopmentPage } from '@/pages/SelfDevelopment/SelfDevelopment'
+import { BookDetailPage } from '@/pages/BookDetail/BookDetail'
+import { CartPage } from '@/pages/Cart/Cart'
 import { LoginPage } from '@/pages/Login/Login'
 
 export const router = createBrowserRouter([
@@ -15,6 +17,8 @@ export const router = createBrowserRouter([
       { path: 'it', element: <ItBooksPage /> },
       { path: 'novel', element: <NovelPage /> },
       { path: 'self-development', element: <SelfDevelopmentPage /> },
+      { path: 'books/:bookId', element: <BookDetailPage /> },
+      { path: 'cart', element: <CartPage /> },
     ],
   },
 

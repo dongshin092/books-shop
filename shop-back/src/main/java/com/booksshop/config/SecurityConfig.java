@@ -34,7 +34,7 @@ public class SecurityConfig {
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/health", "/api/auth/login", "/api/books").permitAll()
+                .requestMatchers("/api/health", "/api/auth/login", "/api/books/**").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(

@@ -27,6 +27,11 @@ export function UserMenu() {
     navigate('/profile')
   }
 
+  const handleCart = () => {
+    setOpen(false)
+    navigate('/cart')
+  }
+
   const handleLogout = () => {
     setOpen(false)
     logout()
@@ -48,6 +53,9 @@ export function UserMenu() {
         <div className={styles.menu}>
           <button type="button" className={styles.item} onClick={handleProfile}>
             프로필
+          </button>
+          <button type="button" className={styles.item} onClick={handleCart}>
+            장바구니
           </button>
           <button type="button" className={styles.item} onClick={handleLogout}>
             로그아웃
