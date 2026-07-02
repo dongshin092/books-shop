@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router'
 import { useBookDetail } from '@/hooks/queries/useBooks'
 import { useAuthStore } from '@/stores/useAuthStore'
+import { useAddToCart } from '@/hooks/useAddToCart'
 import styles from './BookDetail.module.css'
 
 function formatDate(iso) {
@@ -84,6 +85,7 @@ export function BookDetailPage() {
 
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
   const { data: book, isPending, isError } = useBookDetail(bookId, page, size)
+  const { addToCart, isPending: isAdding } = useAddToCart()
 
   function handleAuthRequired() {
     if (!isAuthenticated) {
@@ -155,7 +157,8 @@ export function BookDetailPage() {
           <div className={styles.buttonRow}>
             <button
               className={styles.cartBtn}
-              onClick={handleAuthRequired}
+              onClick={() => addToCart(book.bookId)}
+              disabled={isAdding}
             >
               장바구니
             </button>

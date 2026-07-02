@@ -6,6 +6,12 @@ export async function fetchCarts() {
   return data.data
 }
 
+// POST /api/carts — 장바구니 담기 (수량 1 고정, 동일 도서면 서버에서 수량 +1)
+export async function addCart(bookId) {
+  const { data } = await api.post('/carts', { bookId, quantity: 1 })
+  return data
+}
+
 // PUT /api/carts — 장바구니 아이템 수량 변경
 export async function updateCartQuantity({ itemId, quantity }) {
   const { data } = await api.put('/carts', { itemId, quantity })

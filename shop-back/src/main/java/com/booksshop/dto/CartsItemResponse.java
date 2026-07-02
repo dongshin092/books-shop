@@ -6,6 +6,7 @@ public record CartsItemResponse(
         String title,
         String author,
         String publisher,
+        String coverImage,
         Integer salePrice,
         Integer quantity
 ) {

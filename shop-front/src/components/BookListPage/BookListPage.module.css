@@ -167,10 +167,6 @@
   @apply bg-blue-700;
 }
 
-.listBtn {
-  @apply text-xs text-gray-400 hover:text-gray-600 transition-colors underline-offset-2;
-}
-
 /* ── 페이지네이션 ── */
 .pagination {
   @apply flex items-center justify-center gap-1 pt-4;

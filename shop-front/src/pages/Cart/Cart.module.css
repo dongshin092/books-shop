@@ -103,7 +103,11 @@
 }
 
 .cover {
-  @apply h-[100px] w-[72px] shrink-0 rounded-md bg-[#E8E4DF];
+  @apply h-[100px] w-[72px] shrink-0 overflow-hidden rounded-md bg-[#E8E4DF];
+}
+
+.coverImage {
+  @apply h-full w-full object-cover;
 }
 
 .info {

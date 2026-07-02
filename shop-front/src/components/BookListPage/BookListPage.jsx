@@ -1,36 +1,24 @@
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router'
 import { useAuthStore } from '@/stores/useAuthStore'
-import { BOOK_CATEGORIES } from '@/mocks/bookList'
+import { useCategoryBooks } from '@/hooks/queries/useBooks'
+import { useAddToCart } from '@/hooks/useAddToCart'
 import styles from './BookListPage.module.css'
 
-const PAGE_SIZE = 10
+const CATEGORIES = {
+  it: { types: 'IT', label: 'IT 서적' },
+  novel: { types: 'NOVEL', label: '소설' },
+  'self-development': { types: 'SELF', label: '자기개발서' },
+}
 
 const SORT_OPTIONS = [
-  { key: 'popular', label: '인기순' },
-  { key: 'newest', label: '최신순' },
-  { key: 'priceLow', label: '낮은가격순' },
-  { key: 'priceHigh', label: '높은가격순' },
-  { key: 'review', label: '리뷰많은순' },
+  { key: 'new', label: '최신순' },
+  { key: 'lower', label: '낮은가격순' },
+  { key: 'high', label: '높은가격순' },
+  { key: 'reviewCnt', label: '리뷰많은순' },
 ]
 
-function sortBooks(books, sortKey) {
-  const sorted = [...books]
-  switch (sortKey) {
-    case 'popular':
-      return sorted.sort((a, b) => b.reviewCount - a.reviewCount)
-    case 'newest':
-      return sorted.sort((a, b) => b.publishedDate.localeCompare(a.publishedDate))
-    case 'priceLow':
-      return sorted.sort((a, b) => a.salePrice - b.salePrice)
-    case 'priceHigh':
-      return sorted.sort((a, b) => b.salePrice - a.salePrice)
-    case 'review':
-      return sorted.sort((a, b) => b.reviewCount - a.reviewCount)
-    default:
-      return sorted
-  }
-}
+const PAGE_SIZE = 10
 
 function StarDisplay({ rating }) {
   // rating은 10점 만점 → 5개 별로 표시
@@ -44,6 +32,7 @@ function StarDisplay({ rating }) {
 
 function BookItem({ book }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
+  const { addToCart, isPending: isAdding } = useAddToCart()
 
   function handleAuthRequired() {
     if (!isAuthenticated) {
@@ -110,14 +99,15 @@ function BookItem({ book }) {
 
       {/* 액션 버튼 */}
       <div className={styles.actions}>
-        <button className={styles.cartBtn} onClick={handleAuthRequired}>
+        <button
+          className={styles.cartBtn}
+          onClick={() => addToCart(book.id)}
+          disabled={isAdding}
+        >
           장바구니
         </button>
         <button className={styles.buyBtn} onClick={handleAuthRequired}>
           바로구매
-        </button>
-        <button className={styles.listBtn} onClick={handleAuthRequired}>
-          리스트에 담기
         </button>
       </div>
     </div>
@@ -191,18 +181,18 @@ function Pagination({ page, totalPages, onPageChange }) {
 }
 
 export function BookListPage({ categoryKey }) {
-  const [sortKey, setSortKey] = useState('popular')
+  const [orderType, setOrderType] = useState('new')
   const [page, setPage] = useState(0)
 
-  const category = BOOK_CATEGORIES[categoryKey]
-  const allBooks = category?.books ?? []
-
-  const sortedBooks = useMemo(() => sortBooks(allBooks, sortKey), [allBooks, sortKey])
-  const totalPages = Math.ceil(sortedBooks.length / PAGE_SIZE)
-  const pageBooks = sortedBooks.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
+  const category = CATEGORIES[categoryKey]
+  const { data, isPending, isError, error } = useCategoryBooks(category?.types, {
+    page,
+    size: PAGE_SIZE,
+    orderType,
+  })
 
   function handleSort(key) {
-    setSortKey(key)
+    setOrderType(key)
     setPage(0)
   }
 
@@ -210,6 +200,10 @@ export function BookListPage({ categoryKey }) {
     setPage(p)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  const totalCount = data?.totalCount ?? 0
+  const totalPages = data?.totalPages ?? 0
+  const books = data?.items ?? []
 
   return (
     <div className={styles.page}>
@@ -226,13 +220,13 @@ export function BookListPage({ categoryKey }) {
       <div className={styles.header}>
         <div className={styles.titleRow}>
           <h1 className={styles.categoryTitle}>{category?.label}</h1>
-          <span className={styles.totalBadge}>총 {allBooks.length}권</span>
+          <span className={styles.totalBadge}>총 {totalCount}권</span>
         </div>
         <div className={styles.sortTabs}>
           {SORT_OPTIONS.map((opt) => (
             <button
               key={opt.key}
-              className={`${styles.sortTab} ${sortKey === opt.key ? styles.sortTabActive : ''}`}
+              className={`${styles.sortTab} ${orderType === opt.key ? styles.sortTabActive : ''}`}
               onClick={() => handleSort(opt.key)}
             >
               {opt.label}
@@ -241,15 +235,22 @@ export function BookListPage({ categoryKey }) {
         </div>
       </div>
 
-      {/* 도서 목록 */}
-      <div className={styles.bookList}>
-        {pageBooks.map((book) => (
-          <BookItem key={book.id} book={book} />
-        ))}
-      </div>
+      {isPending && <p className={styles.bookMeta}>불러오는 중…</p>}
+      {isError && <p className={styles.bookMeta}>데이터를 불러오지 못했습니다. ({error.message})</p>}
 
-      {/* 페이지네이션 */}
-      <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
+      {!isPending && !isError && (
+        <>
+          {/* 도서 목록 */}
+          <div className={styles.bookList}>
+            {books.map((book) => (
+              <BookItem key={book.id} book={book} />
+            ))}
+          </div>
+
+          {/* 페이지네이션 */}
+          <Pagination page={page} totalPages={totalPages} onPageChange={handlePageChange} />
+        </>
+      )}
     </div>
   )
 }

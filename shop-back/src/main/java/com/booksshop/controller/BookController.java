@@ -3,6 +3,7 @@ package com.booksshop.controller;
 import com.booksshop.common.ApiResponse;
 import com.booksshop.dto.BookDetailResponse;
 import com.booksshop.dto.BookSectionsResponse;
+import com.booksshop.dto.CategoryBookPageResponse;
 import com.booksshop.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,5 +30,14 @@ public class BookController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return ApiResponse.ok(bookService.getBookDetail(bookId, page, size));
+    }
+
+    @GetMapping("/categories/{types}")
+    public ApiResponse<CategoryBookPageResponse> getCategoryBooks(
+            @PathVariable String types,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "new") String orderType) {
+        return ApiResponse.ok(bookService.getCategoryBooks(types, page, size, orderType));
     }
 }

@@ -1,11 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { fetchCarts, updateCartQuantity, deleteCartItems } from '@/api/carts'
+import { fetchCarts, addCart, updateCartQuantity, deleteCartItems } from '@/api/carts'
 
 export function useCarts() {
   return useQuery({
     queryKey: ['carts'],
     queryFn: fetchCarts,
     retry: 1,
+  })
+}
+
+export function useAddCart() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: addCart,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['carts'] })
+    },
   })
 }
 

@@ -149,7 +149,16 @@ export function CartPage() {
                     >
                       {checked && <CheckIcon />}
                     </span>
-                    <div className={styles.cover} />
+                    <div className={styles.cover}>
+                      {item.coverImage && (
+                        <img
+                          src={item.coverImage}
+                          alt={item.title}
+                          className={styles.coverImage}
+                          onError={(e) => { e.currentTarget.style.display = 'none' }}
+                        />
+                      )}
+                    </div>
                     <div className={styles.info}>
                       <p className={styles.itemTitle}>{item.title}</p>
                       <p className={styles.itemAuthor}>{item.author} · {item.publisher}</p>

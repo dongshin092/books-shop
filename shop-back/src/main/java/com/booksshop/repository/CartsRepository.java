@@ -13,7 +13,7 @@ public interface CartsRepository extends JpaRepository<Carts, String> {
 
     @Query("""
             select new com.booksshop.dto.CartsItemResponse(
-                c.id, b.id, b.title, b.author, b.publisher, b.salePrice, c.quantity)
+                c.id, b.id, b.title, b.author, b.publisher, b.coverImage, b.salePrice, c.quantity)
             from Carts c join Book b on c.bookId = b.id
             where c.userId = :userId
             order by c.createdAt desc

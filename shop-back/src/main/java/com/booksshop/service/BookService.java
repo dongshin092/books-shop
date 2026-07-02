@@ -3,6 +3,9 @@ package com.booksshop.service;
 import com.booksshop.common.ErrorCode;
 import com.booksshop.dto.BookDetailResponse;
 import com.booksshop.dto.BookSectionsResponse;
+import com.booksshop.dto.CategoryBookItemResponse;
+import com.booksshop.dto.CategoryBookPageResponse;
+import com.booksshop.dto.CategoryBookRow;
 import com.booksshop.dto.ReviewItemResponse;
 import com.booksshop.dto.ReviewPageResponse;
 import com.booksshop.entity.Book;
@@ -18,10 +21,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class BookService {
+
+    private static final Set<String> VALID_CATEGORY_TYPES = Set.of("IT", "NOVEL", "SELF");
 
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
@@ -65,5 +71,32 @@ public class BookService {
         );
 
         return BookDetailResponse.of(book, categoryName, reviewList);
+    }
+
+    @Transactional(readOnly = true)
+    public CategoryBookPageResponse getCategoryBooks(String types, int page, int size, String orderType) {
+        if (!VALID_CATEGORY_TYPES.contains(types)) {
+            throw new BusinessException(ErrorCode.INVALID_CATEGORY_TYPE);
+        }
+
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<CategoryBookRow> rows = switch (orderType) {
+            case "lower" -> bookRepository.findByCategoryTypeOrderByPriceLow(types, pageRequest);
+            case "high" -> bookRepository.findByCategoryTypeOrderByPriceHigh(types, pageRequest);
+            case "reviewCnt" -> bookRepository.findByCategoryTypeOrderByReviewCount(types, pageRequest);
+            default -> bookRepository.findByCategoryTypeOrderByNew(types, pageRequest);
+        };
+
+        List<CategoryBookItemResponse> items = rows.getContent().stream()
+                .map(CategoryBookItemResponse::from)
+                .toList();
+
+        return new CategoryBookPageResponse(
+                rows.getTotalElements(),
+                page,
+                size,
+                rows.getTotalPages(),
+                items
+        );
     }
 }
